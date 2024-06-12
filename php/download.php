@@ -4,6 +4,13 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 'On');
 
+    // Confirm that you have the special code
+    $dl_code = $_GET["dl"] ?? "";
+    if ($dl_code !== DOWNLOAD_CODE) {
+        echo 'Incorrect download code.';
+        exit;
+    }
+
     // Specify the date
     $date = $_GET["date"] ?? "";
     if (strlen($date) == 0) {
