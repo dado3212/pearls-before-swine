@@ -1,0 +1,11 @@
+## Rewrite ##
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule "^page/0$" "/projects/pearls" [QSA]
+
+	RewriteRule "^page/(\d+)/?" "index.php?page=$1" [QSA]
+</IfModule>
