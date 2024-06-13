@@ -166,6 +166,8 @@
 					$words = tokenize($query);
 					$bolded = highlightWords($bolded, $words);
 					$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
+				} else {
+					$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
 				}
 
 				echo "
