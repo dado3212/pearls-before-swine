@@ -47,7 +47,43 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Pearls Before Swine Index</title>
+		<title>Pearls Before Swine | Search</title>
+
+		<!-- Meta tags -->
+        <meta name="robots" content="index, follow, archive">
+        <meta name="description" content="Search all historical Pearls Before Swine comic strips by text!">
+        <meta charset="utf-8" />
+        <meta http-equiv="Cache-control" content="public">
+
+        <!-- Semantic Markup -->
+        <meta property="og:title" content="Pearls Before Swine | Search">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://alexbeals.com/projects/pearls/assets/preview.png">
+        <meta property="og:url" content="https://alexbeals.com/projects/pearls">
+        <meta property="og:description" content="Search all historical Pearls Before Swine comic strips by text!">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:creator" content="@alex_beals">
+
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+		<link rel="manifest" href="./assets/favicon/site.webmanifest">
+		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="./assets/favicon/favicon.ico">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-M15SP790QM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-M15SP790QM');
+        </script>
 
 		<?php
 			// Respects 'Request Desktop Site'
@@ -73,13 +109,6 @@
 
 			header {
 				text-align: center;
-			}
-
-			header a {
-				display: table;
-				margin: 0 auto;
-				text-decoration: none;
-				color: #484c55;
 			}
 
 			form {
@@ -171,14 +200,25 @@
 			.navigation a:hover {
 				box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 			}
+
+			header a {
+				text-decoration: none;
+    			color: #484c55;
+			}
+
+			header img {
+				display: inline-block;
+				height: 30px;
+			}
 		</style>
 	</head>
 	<body>
 		<header>
-			<a href="/projects/pearls">
-				<h1>Pearls Before Swine Indexer</h1>
-				<h3>Unaffiliated with Pearls Before Swine</h3>
-			</a>
+			<h1>
+				<img src="./assets/pig.png">
+				<a href="/projects/pearls">Pearls Before Swine | Search</a>
+			</h1>
+			<h3>Unaffiliated with Pearls Before Swine</h3>
 		</header>
 
 		<form action="/projects/pearls">
