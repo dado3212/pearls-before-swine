@@ -1,6 +1,6 @@
 <?php
 	// Fetch from PHP and just inline it for JS
-	include("secret.php");
+	include("php/secret.php");
 
 	error_reporting(-1);
 	ini_set('display_errors', 'On');
@@ -220,11 +220,15 @@
 				$queryString = "";
 			}
 
+			// If you're not on page 0, you can go back
 			if ($page > 0) {
 				echo "<a href='/projects/pearls/page/" . ($page - 1) . "$queryString'>← Previous</a>";
 			}
+			// If you hit the limit, there are (probably?) more.
+			if (count($comics) === $limit) {
+				echo "<a href='/projects/pearls/page/" . ($page + 1) . "$queryString'>Next →</a>";
+			}
 		?>
-			<a href="/projects/pearls/page/<?php echo ($page + 1) . $queryString; ?>">Next →</a>
 		</div>
 	</body>
 </html>
