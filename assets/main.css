@@ -58,6 +58,7 @@ button {
 
 .comic .image {
     min-width: 600px;
+    align-self: center;
 }
 
 .comic img {
@@ -121,7 +122,10 @@ header img {
 @media (max-width: 990px) {
     .comic .main {
         flex-direction: column;
-        align-items: center;
+    }
+
+    .comic .image {
+        margin: 10px 0 2px 0;
     }
 
     .comic p {
