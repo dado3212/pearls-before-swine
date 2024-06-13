@@ -29,14 +29,14 @@
 			$queryString .= "ocr LIKE CONCAT('%', ?, '%') AND ";
 		}
 		$queryString = substr($queryString, 0, -4);
-		$queryString .= "LIMIT $limit OFFSET " . $page * $limit;
+		$queryString .= "ORDER BY date ASC LIMIT $limit OFFSET " . $page * $limit;
 
 		$stmt = $PDO->prepare($queryString);
 		for ($i = 0; $i < count($words); $i++) {
 			$stmt->bindParam($i + 1, $words[$i]);
 		}
 	} else {
-		$stmt = $PDO->prepare("SELECT * FROM strips LIMIT $limit OFFSET " . $page * $limit);
+		$stmt = $PDO->prepare("SELECT * FROM strips ORDER BY date ASC LIMIT $limit OFFSET " . $page * $limit);
 	}
 	
 	$stmt->execute();
