@@ -10,6 +10,7 @@ html, body {
 body {
     max-width: 75em;
     margin: 0 auto;
+    width: 90vw;
 }
 
 header {
@@ -50,8 +51,9 @@ button {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
 }
 
-.comic > div {
+.comic .main {
     display: flex;
+    overflow: hidden;
 }
 
 .comic .image {
@@ -114,4 +116,25 @@ header a {
 header img {
     display: inline-block;
     height: 30px;
+}
+
+@media (max-width: 990px) {
+    .comic .main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .comic p {
+        margin: 10px 0 0 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .comic .image {
+        min-width: 0px;
+    }
+
+    .comic img {
+        width: 100%;
+    }
 }

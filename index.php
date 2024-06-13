@@ -89,7 +89,7 @@
 		<?php
 			// Respects 'Request Desktop Site'
 			if (preg_match("/(iPhone|iPod|iPad|Android|BlackBerry)/i", $_SERVER['HTTP_USER_AGENT'])) {
-				?><meta name="viewport" content="width=900"><?php
+				?><meta name="viewport" content="width=device-width, initial-scale=1.0"><?php
 			}
 		?>
 	</head>
@@ -121,7 +121,7 @@
 				echo "
 					<div class='comic'>
 						<div class='title'><span>" . date('F j, Y', strtotime($strip['date'])) . "</span><a href=\"https://www.gocomics.com/pearlsbeforeswine/".date('Y/m/d', strtotime($strip['date']))."\" target=\"_blank\">🔗&#xFE0E;</a></div>
-						<div>
+						<div class='main'>
 							<div class='image'>
 								<img src='{$strip['small_url']}' />
 							</div>
