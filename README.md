@@ -1,8 +1,10 @@
-# Pearls Before Swine
+# <img src="/assets/pig.png" width="40" alt="Logo"/> Pearls Before Swine
 
 This repository does a couple of things around the webcomic [Pearls Before Swine](https://www.gocomics.com/pearlsbeforeswine) (all credits go to its creator/character Stephen Pastis). 
 
 For one, it's the code of the indexer which has a transcription for every strip, and is searchable on https://alexbeals.com/projects/pearls/. This can help to find comics matching themes, or just finding one that you half-remember.
+
+<img src="/assets/preview.png?raw=true" height="300" alt="Preview"/>
 
 It also has the code for automatically downloading the daily Pearls Before Swine, running it through OCR analysis (what used to be a modified version of Tesseract, and is now politely asking ChatGPT), adds it to the aforementioned indexer, and posts it to https://www.reddit.com/r/pearlsbeforeswine.
 
