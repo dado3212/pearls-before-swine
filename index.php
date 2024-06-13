@@ -21,8 +21,22 @@
 
 	$PDO = createConnection();
 
+	function tokenize($string) {
+		// Use preg_match_all to find all quoted and unquoted strings
+		preg_match_all('/"([^"]+)"|(\S+)/', $string, $matches);
+		$tokens = [];
+		
+		// Extract the matches and store them in an array
+		foreach ($matches[0] as $match) {
+			// Remove surrounding quotes if present
+			$tokens[] = trim($match, '"');
+		}
+		
+		return $tokens;
+	}
+
 	if ($query !== "") {
-		$words = explode(" ", $query);
+		$words = tokenize($query);
 
 		$queryString = "SELECT * FROM strips WHERE ";
 		foreach ($words as $word) {
@@ -85,6 +99,13 @@
 
             gtag('config', 'G-M15SP790QM');
         </script>
+		<script>
+			function blowUp(bigImage) {
+				if (event.altKey) {
+					window.open(bigImage, '_blank');
+				}
+			}
+		</script>
 
 		<?php
 			// Respects 'Request Desktop Site'
@@ -108,14 +129,43 @@
 		</form>
 
 		<?php
+			function highlightWords($text, $words) {
+				$output = '';
+				$length = strlen($text);
+				$i = 0;
+			
+				while ($i < $length) {
+					$matched = false;
+			
+					// Check each word in the list
+					foreach ($words as $word) {
+						$wordLength = strlen($word);
+			
+						// Check if the word matches the substring starting at the current position
+						if (strncasecmp(substr($text, $i, $wordLength), $word, $wordLength) == 0) {
+							$output .= "<span class='found'>" . substr($text, $i, $wordLength) . "</span>";
+							$i += $wordLength;
+							$matched = true;
+							break;
+						}
+					}
+			
+					// If no match, add the current character to the output
+					if (!$matched) {
+						$output .= $text[$i];
+						$i++;
+					}
+				}
+			
+				return $output;
+			}
+			
 			foreach ($comics as $strip) {
 				$bolded = htmlspecialchars($strip["ocr"]);
-				$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
 				if ($query !== "") {
-					$words = explode(" ", $query);
-					foreach ($words as $word) {
-						$bolded = preg_replace("/" . $word . "/i", "<span class='found'>\$0</span>", $bolded);
-					}
+					$words = tokenize($query);
+					$bolded = highlightWords($bolded, $words);
+					$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
 				}
 
 				echo "
@@ -123,7 +173,7 @@
 						<div class='title'><span>" . date('F j, Y', strtotime($strip['date'])) . "</span><a href=\"https://www.gocomics.com/pearlsbeforeswine/".date('Y/m/d', strtotime($strip['date']))."\" target=\"_blank\">🔗&#xFE0E;</a></div>
 						<div class='main'>
 							<div class='image'>
-								<img src='{$strip['small_url']}' />
+								<img src='{$strip['small_url']}' onclick='blowUp(\"{$strip['url']}\");' />
 							</div>
 							<p class='ocr'>
 								{$bolded}
