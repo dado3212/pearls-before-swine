@@ -52,11 +52,22 @@ function uploadMedia($access_token, $image_url) {
     // Create a temporary file to store the downloaded image
     $tmp_filename = sys_get_temp_dir() . '/' . $image_temp_name;
     file_put_contents($tmp_filename, $image_data);
+    $content_type = mime_content_type($tmp_filename);
+
+    // If it's a GIF, convert it to JPG
+    if ($content_type === 'image/gif') {
+        $old_filename = $tmp_filename;
+        $gif_img = imagecreatefromgif($tmp_filename);
+        $image_temp_name = $image_temp_name . '1';
+        $tmp_filename = sys_get_temp_dir() . '/' . $image_temp_name;
+        imagejpeg($gif_img, $tmp_filename);
+        unlink($old_filename);
+    }
 
     // Prepare the image for cURL
     $data = [
         'filepath' => $tmp_filename,
-        'mimetype' => 'image/gif',
+        'mimetype' => 'image/jpeg',
     ];
 
     $options = [
@@ -79,7 +90,7 @@ function uploadMedia($access_token, $image_url) {
     foreach ($body['args']['fields'] as $field) {
         $upload_data[$field['name']] = $field['value'];
     }
-    $image_file = curl_file_create($tmp_filename, 'image/gif', $image_temp_name);
+    $image_file = curl_file_create($tmp_filename, 'image/jpeg', $image_temp_name);
     $upload_data['file'] = $image_file;
 
     // Actually upload it
@@ -128,8 +139,6 @@ function createRedditPost($access_token, $title, $image_url) {
     curl_setopt_array($ch, $options);
     $response = curl_exec($ch);
     curl_close($ch);
-
-    // echo var_export(print_r($response, true));
 
     $body = json_decode($response, true);
     return $body;
