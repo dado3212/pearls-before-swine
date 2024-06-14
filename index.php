@@ -172,7 +172,7 @@
 
 				echo "
 					<div class='comic'>
-						<div class='title'><span>" . date('F j, Y', strtotime($strip['date'])) . "</span><a href=\"https://www.gocomics.com/pearlsbeforeswine/".date('Y/m/d', strtotime($strip['date']))."\" target=\"_blank\">🔗&#xFE0E;</a></div>
+						<div class='title'><span>" . date('F j, Y', strtotime($strip['date'])) . "</span><a href=\"https://www.gocomics.com/pearlsbeforeswine/".date('Y/m/d', strtotime($strip['date']))."\" target=\"_blank\">⋐⋑</a></div>
 						<div class='main'>
 							<div class='image'>
 								<img src='{$strip['small_url']}' onclick='blowUp(\"{$strip['url']}\");' />

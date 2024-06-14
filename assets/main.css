@@ -77,12 +77,15 @@ button {
     font-weight: bold;
     font-family: sans-serif;
     font-size: 1.4em;
+    display: flex;
 }
 
 .comic .title a {
-    /** Nothing works to style it not as emoji :( */
     padding-left: 5px;
     text-decoration: none;
+    color: #484c55;
+    letter-spacing: -0.1em;
+    line-height: 0.85em;
 }
 
 .navigation {
