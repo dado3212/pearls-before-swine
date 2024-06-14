@@ -8,6 +8,8 @@ For one, it's the code of the indexer which has a transcription for every strip,
 
 It also has the code for automatically downloading the daily Pearls Before Swine, running it through OCR analysis (what used to be a modified version of Tesseract, and is now politely asking ChatGPT), adds it to the aforementioned indexer, and posts it to https://www.reddit.com/r/pearlsbeforeswine.
 
+If you're interested in the transcribed data, a dump of the SQL database as of June 13th, 2024 is in the assets folder.
+
 ## Setup
 
 ### Create Reddit App
