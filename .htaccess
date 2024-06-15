@@ -8,4 +8,8 @@
 	RewriteRule "^page/0$" "/projects/pearls" [QSA]
 
 	RewriteRule "^page/(\d+)/?" "index.php?page=$1" [QSA]
+
+	# HTTPS Redirection
+	RewriteCond %{HTTPS} !=on
+	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [QSA,END,R=permanent]
 </IfModule>
