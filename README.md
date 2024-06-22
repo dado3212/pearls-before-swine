@@ -72,7 +72,7 @@ while (currentDate < endDate) {
 }
 ```
 
-For backfilling OCR if you check out commit 291f234 then you can use `lmao.php` and `updateOCR.php` to bulk-process these.
+For backfilling OCR if you check out commit 291f234 then you can use the descriptively named `lmao.php` and `updateOCR.php` to bulk-process these.
 ```
 https://alexbeals.com/projects/pearls/php/lmao.php?q=<code>
 ```
