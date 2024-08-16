@@ -50,7 +50,7 @@
 			$stmt->bindParam($i + 1, $words[$i]);
 		}
 	} else {
-		$stmt = $PDO->prepare("SELECT * FROM strips ORDER BY date ASC LIMIT $limit OFFSET " . $page * $limit);
+		$stmt = $PDO->prepare("SELECT * FROM strips ORDER BY date DESC LIMIT $limit OFFSET " . $page * $limit);
 	}
 	
 	$stmt->execute();
