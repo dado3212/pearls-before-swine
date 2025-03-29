@@ -113,7 +113,7 @@
 
     // Get the image
     $website = 'https://www.gocomics.com/pearlsbeforeswine/'.date('Y/m/d', strtotime($date));
-    preg_match("/data-image=\"(https:\/\/assets.amuniversal.com\/.*?)\"/", file_get_contents($website), $matches);
+    preg_match("/data-image=\"(https:\/\/featureassets.amuniversal.com\/.*?)\"/", file_get_contents($website), $matches);
     if (!array_key_exists(1, $matches)) {
         echo 'Failed to find comic.';
         exit;
