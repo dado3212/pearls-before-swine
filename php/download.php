@@ -112,14 +112,19 @@
     }
 
     // Get the image
-    $website = 'https://www.gocomics.com/pearlsbeforeswine/'.date('Y/m/d', strtotime($date));
-    preg_match("/data-image=\"(https:\/\/featureassets.amuniversal.com\/.*?)\"/", file_get_contents($website), $matches);
-    if (!array_key_exists(1, $matches)) {
-        echo 'Failed to find comic.';
+    libxml_use_internal_errors(true); 
+    $dom = new DOMDocument();
+    @$dom->loadHTML(@file_get_contents('https://www.gocomics.com/pearlsbeforeswine/'.date('Y/m/d', strtotime($date))), LIBXML_NOERROR | LIBXML_NOWARNING);
+    libxml_clear_errors();
+    $xpath = new DOMXPath($dom);
+
+    $imgNodes = $xpath->query('//section[@data-sentry-component="ShowComicViewer"]//img');
+    if ($imgNodes->length != 1) {
+        echo 'Found more than one comic, aborting.';
         exit;
     }
-    $comic_url = $matches[1];
 
+    $comic_url = $imgNodes->item(0)->getAttribute('src');
     // Get the OCR through ChatGPT
     $ocr = getOCR($comic_url);
 
