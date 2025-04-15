@@ -51,9 +51,9 @@ define('REDDIT_PASSWORD', '<code6>');
 
 ### Crontab
 
-Automatically trigger this daily. I do this with crontab, triggering at 8am PST every day (server is on UTC).
+Automatically trigger this daily. I do this with crontab, triggering at 11am PST every day (server is on UTC).
 ```
-00 15 * * * php /var/www/alexbeals.com/public_html/projects/pearls/php/download.php <DOWNLOAD_CODE>
+00 18 * * * php /var/www/alexbeals.com/public_html/projects/pearls/php/download.php <DOWNLOAD_CODE> >> /var/www/alexbeals.com/public_html/projects/pearls/log.txt 2>&1
 ```
 
 ## Backfilling Comics

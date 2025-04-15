@@ -13,3 +13,8 @@
 	RewriteCond %{HTTPS} !=on
 	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [QSA,END,R=permanent]
 </IfModule>
+
+<Files "log.txt">
+  Order allow,deny
+  Deny from all
+</Files>
