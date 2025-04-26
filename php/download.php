@@ -122,13 +122,17 @@
     libxml_clear_errors();
     $xpath = new DOMXPath($dom);
 
-    $ogImgNodes = $xpath->query('//meta[@property="og:image"]');
-    if ($ogImgNodes->length != 1) {
-        echo 'Found ' . $ogImgNodes->length . ' comics, aborting.';
+    $nodes = $xpath->query('//script[@type="application/ld+json"]');
+    foreach ($nodes as $node) {
+        $json = json_decode($node->textContent, true);
+        if (($json['datePublished'] ?? null) === date('F j, Y', strtotime($date)) && isset($json['contentUrl'])) {
+            $comic_url = $json['contentUrl'];
+        }
+    }
+    if ($comic_url === null) {
+        echo 'Failed to find URL, aborting.';
         exit;
     }
-
-    $comic_url = $ogImgNodes->item(0)->getAttribute('content');
     // Get the OCR through ChatGPT
     $ocr = getOCR($comic_url);
 

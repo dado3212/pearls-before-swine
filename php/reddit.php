@@ -60,7 +60,7 @@ function uploadMedia($access_token, $image_url) {
         $gif_img = imagecreatefromgif($tmp_filename);
         $image_temp_name = $image_temp_name . '1';
         $tmp_filename = sys_get_temp_dir() . '/' . $image_temp_name;
-        imagejpeg($gif_img, $tmp_filename);
+        imagejpeg($gif_img, $tmp_filename, 100);
         unlink($old_filename);
     }
 
