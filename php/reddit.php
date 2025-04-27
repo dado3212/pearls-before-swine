@@ -60,7 +60,9 @@ function uploadMedia($access_token, $image_url) {
         $gif_img = imagecreatefromgif($tmp_filename);
         $image_temp_name = $image_temp_name . '1';
         $tmp_filename = sys_get_temp_dir() . '/' . $image_temp_name;
-        imagejpeg($gif_img, $tmp_filename, 100);
+        // Disable compression on conversion
+        // Uploading PNG compresses better on Reddit than JPG
+        imagepng($gif_img, $tmp_filename, 0);
         unlink($old_filename);
     }
 
