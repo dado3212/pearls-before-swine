@@ -161,13 +161,17 @@
 			}
 			
 			foreach ($comics as $strip) {
-				$bolded = htmlspecialchars($strip["ocr"]);
-				if ($query !== "") {
-					$words = tokenize($query);
-					$bolded = highlightWords($bolded, $words);
-					$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
+				if ($strip["ocr"] === null) {
+					$ocr_text = 'OCR failed to run. Please file an issue in <a href="https://github.com/dado3212/pearls-before-swine/issues/" target="_blank">https://github.com/dado3212/pearls-before-swine/issues/</a>';
 				} else {
-					$bolded = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $bolded));
+					$ocr_text = htmlspecialchars($strip["ocr"]);
+					if ($query !== "") {
+						$words = tokenize($query);
+						$ocr_text = highlightWords($ocr_text, $words);
+						$ocr_text = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $ocr_text));
+					} else {
+						$ocr_text = preg_replace("/\n/", "<br>", preg_replace("/\n\n/", "\n", $ocr_text));
+					}
 				}
 
 				echo "
@@ -178,7 +182,7 @@
 								<img src='{$strip['small_url']}' onclick='blowUp(\"{$strip['url']}\");' />
 							</div>
 							<p class='ocr'>
-								{$bolded}
+								{$ocr_text}
 							</p>
 						</div>
 					</div>
