@@ -111,8 +111,39 @@
         }
     }
 
+    function getComicPage($date) {
+        $url = 'https://www.gocomics.com/pearlsbeforeswine/' . date('Y/m/d', strtotime($date));
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 5,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_TIMEOUT => 20,
+            CURLOPT_ENCODING => '',               // accept gzip
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_HTTPHEADER => [
+                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language: en-US,en;q=0.9',
+            ],
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15',
+            // CURLOPT_COOKIEJAR => __DIR__ . '/cookies.txt',
+            // CURLOPT_COOKIEFILE => __DIR__ . '/cookies.txt',
+        ]);
+
+        $body = curl_exec($ch);
+        // Can add in proper processing around this if it starts failing
+        // $err  = curl_error($ch);
+        // $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return $body;
+    }
+
     // Get the image
-    $contents = @file_get_contents('https://www.gocomics.com/pearlsbeforeswine/'.date('Y/m/d', strtotime($date)));
+    $contents = getComicPage($date);
     // For temporary debugging
     // file_put_contents('./tmp.txt', $contents);
 
@@ -123,6 +154,7 @@
     $xpath = new DOMXPath($dom);
 
     $nodes = $xpath->query('//script[@type="application/ld+json"]');
+    $comic_url = null;
     foreach ($nodes as $node) {
         $json = json_decode($node->textContent, true);
         if (($json['datePublished'] ?? null) === date('F j, Y', strtotime($date)) && isset($json['contentUrl'])) {

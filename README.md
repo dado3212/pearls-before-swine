@@ -56,6 +56,12 @@ Automatically trigger this daily. I do this with crontab, triggering at 11am PST
 00 18 * * * php /var/www/alexbeals.com/public_html/projects/pearls/php/download.php <DOWNLOAD_CODE> >> /var/www/alexbeals.com/public_html/projects/pearls/log.txt 2>&1
 ```
 
+## Debugging Failures
+
+In `download.php` there's a "For temporary debugging" comment. Uncomment it. Also in that file comment out the "try and post to Reddit" code. Then hit
+
+https://alexbeals.com/projects/pearls/php/download.php?dl=<DOWNLOAD_CODE>&date=2024-06-05
+
 ## Backfilling Comics
 To download just the images, you'll want comment out the OCR and Reddit code and run this:
 
