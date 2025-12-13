@@ -80,17 +80,17 @@
         <meta name="twitter:creator" content="@alex_beals">
 
 		<!-- Favicons -->
-		<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-		<link rel="manifest" href="./assets/favicon/site.webmanifest">
-		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="./assets/favicon/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="/projects/pearls/assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/projects/pearls/assets/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/projects/pearls/assets/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/projects/pearls/assets/favicon/site.webmanifest">
+		<link rel="mask-icon" href="/projects/pearls/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="/projects/pearls/assets/favicon/favicon.ico">
 		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
+		<meta name="msapplication-config" content="/projects/pearls/assets/favicon/browserconfig.xml">
 		<meta name="theme-color" content="#ffffff">
 
-		<link rel="stylesheet" type="text/css" href="assets/main.css">
+		<link rel="stylesheet" type="text/css" href="/projects/pearls/assets/main.css">
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-M15SP790QM"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -117,7 +117,7 @@
 	<body>
 		<header>
 			<h1>
-				<img src="./assets/pig.png">
+				<img src="/projects/pearls/assets/pig.png">
 				<a href="/projects/pearls">Pearls Before Swine | Search</a>
 			</h1>
 			<h3>Unaffiliated with Pearls Before Swine</h3>
