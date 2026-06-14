@@ -38,16 +38,30 @@
 	if ($query !== "") {
 		$words = tokenize($query);
 
-		$queryString = "SELECT * FROM strips WHERE ";
+		// Relevance score: +1 for each word that matches as a whole word
+		// (word boundary) so " ants " ranks above substring hits like "wants".
+		$scoreParts = [];
+		foreach ($words as $word) {
+			$scoreParts[] = "(ocr REGEXP CONCAT('\\\\b', ?, '\\\\b'))";
+		}
+		$scoreString = implode(' + ', $scoreParts);
+
+		$queryString = "SELECT *, ($scoreString) AS relevance FROM strips WHERE ";
 		foreach ($words as $word) {
 			$queryString .= "ocr LIKE CONCAT('%', ?, '%') AND ";
 		}
 		$queryString = substr($queryString, 0, -4);
-		$queryString .= "ORDER BY date ASC LIMIT $limit OFFSET " . $page * $limit;
+		$queryString .= "ORDER BY relevance DESC, date ASC LIMIT $limit OFFSET " . $page * $limit;
 
 		$stmt = $PDO->prepare($queryString);
-		for ($i = 0; $i < count($words); $i++) {
-			$stmt->bindParam($i + 1, $words[$i]);
+		// Bind the score params first (they appear first in the SQL), then the
+		// LIKE params
+		$paramIndex = 1;
+		foreach ($words as $word) {
+			$stmt->bindValue($paramIndex++, $word);
+		}
+		foreach ($words as $word) {
+			$stmt->bindValue($paramIndex++, $word);
 		}
 	} else {
 		$stmt = $PDO->prepare("SELECT * FROM strips ORDER BY date DESC LIMIT $limit OFFSET " . $page * $limit);
